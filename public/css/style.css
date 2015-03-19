@@ -27,82 +27,7 @@ body {
 	right: 105px;
 	top: 0;
 }
-.form-signin {
-	position: absolute;
-	width: 480px;
-	padding: 15px;
-	/*background: rgba(44,55,76,.5);*/
-	margin-top: 260px;
-	/*background-image:-webkit-gradient(linear, left top, right top, from(rgba(57, 194, 218, 0)), color-stop(0.35, rgba(57, 194, 218, 1)), to(rgba(57, 194, 218, 0)));*/
-	background-image:-webkit-linear-gradient(bottom, rgba(44,55,76,1), rgba(44,55,76,.5) 60%, rgba(44,55,76, 0));
-	background-image: -moz-linear-gradient(bottom, rgba(44,55,76,1), rgba(44,55,76,.5) 60%, rgba(44,55,76, 0));
-	background-image: -ms-linear-gradient(bottom, rgba(44,55,76,1), rgba(44,55,76,.5) 60%, rgba(44,55,76, 0));
-	background-image: -o-linear-gradient(bottom, rgba(44,55,76,1), rgba(44,55,76,.5) 60%, rgba(44,55,76, 0));
-	background-image: linear-gradient(to bottom, rgba(44,55,76,1), rgba(44,55,76,.5) 60%, rgba(44,55,76, 0));
-}
-.form-signin.register {
-	margin-top: 30px;
-}
-.form-signin .page-header {
-	margin: 0 0 20px;
-}
-.form-signin h3, .form-signin h6 {
-	color: #ffffff;
-}
-.form-signin input.textfield {
-	width: 100%;
-	padding: 5px 10px;
-	font-size: 13px;
-	border: 0;
-	outline: none;
-	color: #333333;
-}
-.form-signin input.button {
-	width: 100%;
-	padding: 5px 10px;
-	font-size: 13px;
-	border: 0;
-	outline: none;
-	color: #ffffff;
-	background: #34aaf9;
-	background: -moz-linear-gradient(top, #34aaf9 1%, #2989d8 72%, #207cca 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#34aaf9), color-stop(72%,#2989d8), color-stop(100%,#207cca));
-	background: -webkit-linear-gradient(top, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	background: -o-linear-gradient(top, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	background: -ms-linear-gradient(top, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	background: linear-gradient(to bottom, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#34aaf9', endColorstr='#207cca',GradientType=0 );
-}
-.form-signin input.submit {
-	width: 100%;
-	padding: 5px 10px;
-	border: 0;
-	font-size: 13px;
-	color: #ffffff;
-	background: #34aaf9;
-	background: -moz-linear-gradient(top, #34aaf9 1%, #2989d8 72%, #207cca 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#34aaf9), color-stop(72%,#2989d8), color-stop(100%,#207cca));
-	background: -webkit-linear-gradient(top, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	background: -o-linear-gradient(top, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	background: -ms-linear-gradient(top, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	background: linear-gradient(to bottom, #34aaf9 1%,#2989d8 72%,#207cca 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#34aaf9', endColorstr='#207cca',GradientType=0 );
-}
-.form-signin.register input.submit {
-	width: 28.6%;
-	float: right;
-}
 
-.form-signin .col-sm-1 {
-	color: #ffffff;
-}
-.register .col-sm-10, .register .col-sm-12, .register .col-sm-6 {
-	padding-bottom: 12px;
-}
-.register .col-sm-4 {
-	width: 28.9%;
-	margin-right: 0;
-}
 .no-gutter-right {
 	padding-right: 0;
 	margin-right: 3px;
@@ -151,7 +76,7 @@ span.bg-danger {
 	color: #fff;
 	border-radius: 0;
 	border: 0;
-	padding: 8px 40px;
+	padding: 7px 35px;
 	font-size: 11px;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -164,12 +89,21 @@ span.bg-danger {
 }
 #page h3 {
 	font-size: 26px;
-	line-height: 30px;
+	line-height: 32px;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 #page #description {
-	margin: 10px 0 80px;
+	margin: 30px 0 50px;
+}
+#page h3 , #page #description {
+	margin-right: 30px;
+}
+#page #description p {
+	margin-bottom: 15px;
+}
+#page #home .btn-primary {
+	margin-top: 30px;
 }
 #page .segment {
 	margin-top: 26px;
@@ -210,4 +144,58 @@ span.bg-danger {
     -moz-appearance: none;
     appearance: none;
     background: #ffffff url("../images/dropdown.png") no-repeat right center;
+}
+
+#survey .input-xs {
+	width: 18px;
+	height: 18px;
+	font-size: 11px;
+	text-align: center;
+	margin-right: 5px;
+}
+
+#survey input {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+#survey input, #survey label {
+	margin-left: 5%;
+}
+#survey label {
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+/* Modal */
+#registrationCompleteModal {
+	position: fixed;
+	display: inline-block;
+}
+#registrationCompleteModal {
+	background-color: rgba(0,0,0,0.8);
+}
+#registrationCompleteModal .modal-content {
+	border-radius: 0;
+	background-color: transparent;
+	color: #fff;
+	box-shadow: none;
+	border: 0;
+	text-align: center;
+}
+#registrationCompleteModal .modal-dialog {
+	margin: 10% auto;
+}
+#registrationCompleteModal h3 {
+	font-weight: bold;
+	line-height: 30px;
+	margin-bottom: 30px;
+}
+#registrationCompleteModal p {
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: 20px;
+}
+#registrationCompleteModal .btn {
+	font-size: 14px;
+	padding: 5px 35px;
 }

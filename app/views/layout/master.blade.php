@@ -3,7 +3,7 @@
 		<section id="page">
 			<header>
 				<div class="ci-box">
-					{{ HTML::image("images/CI-box.png", "BMW CI", ["class" => 'img-responsive']) }}
+					<a href="{{ URL::route('home')}}">{{ HTML::image("images/CI-box.png", "BMW CI", ["class" => 'img-responsive']) }}</a>
 				</div>
 			</header>
 			<div class="container">

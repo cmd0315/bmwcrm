@@ -11,34 +11,6 @@
 |
 */
 
-/* Home */
-Route::get('/',[
-	'as' => 'home',
-	'uses' => 'HomeController@index'
-]);
-
-/*
-*
-* Auuthenticated group
-*
-*/
-Route::group(array('before' => 'auth'), function(){
-	/*
-	/ CSRF group
-	*/
-	Route::group(array('before' => 'csrf'), function(){
-		
-	});
-
-
-	/*  Sign out (GET) */
-	Route::get('/sign-out', [
-		'as' => 'sessions.signout',
-		'uses' => 'SessionsController@destroy'
-	]);
-});
-
-
 /*
 *
 * Unauthenticated group
@@ -49,14 +21,19 @@ Route::group(array('before' => 'guest'), function(){
 	/ CSRF group
 	*/
 	Route::group(array('before' => 'csrf'), function(){
+		/* Home (POST) */
+		Route::post('/start',[
+			'as' => 'registrations.store',
+			'uses' => 'RegistrationsController@store'
+		]);
 
 		/* Personal Info (POST) */
-		Route::post('/personal_info', [
+		Route::post('/register/{registration_id}', [
 			'as' => 'participants.store',
 			'uses' => 'ParticipantsController@store'
 		]);
 		/* Survey (POST) */
-		Route::post('/survey', [
+		Route::post('/survey/{registration_id}', [
 			'as' => 'survey.store',
 			'uses' => 'SurveyController@store'
 		]);
@@ -66,26 +43,20 @@ Route::group(array('before' => 'guest'), function(){
 	/* Home */
 	Route::get('/',[
 		'as' => 'home',
-		'uses' => 'SessionsController@create'
+		'uses' => 'RegistrationsController@create'
 	]);
 
 	/* Survey (GET) */
-	Route::get('/survey',[
+	Route::get('/survey/{registration_id}',[
 		'as' => 'survey.create',
 		'uses' => 'SurveyController@create'
 	]);
 
-	/* Personal Info (GET) */
-	Route::get('/personal_info',[
-		'as' => 'participants.create',
-		'uses' => 'ParticipantsController@create'
-	]);
-
 
 	/* Register (GET) */
-	Route::get('/register',[
+	Route::get('/register/{registration_id}',[
 		'as' => 'participants.create',
-		'uses' => 'SurveyController@create'
+		'uses' => 'ParticipantsController@create'
 	]);
 
 });

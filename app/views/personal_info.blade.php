@@ -6,7 +6,7 @@
 	<div class="col-md-6">
 		<div class="row">
 			<div class="col-md-12">
-				{{ Form::open(['class' => 'form-horizontal', 'role' => 'form']) }}
+				{{ Form::open(['class' => 'form-horizontal', 'role' => 'form', 'route' => ['participants.store', e($registration->registration_id)]]) }}
 					<div class="row">
 						<div class="col-lg-12">
 							<h3>{{ isset($pageTitle) ? $pageTitle : '' }}</h3>
@@ -24,12 +24,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<select class="form-control" name="personal_salutation" id="personal_salutation">
-												<option value="" disabled selected>SALUTATION*</option>
-												<option value="Mr">Mr.</option>
-												<option value="Ms">Ms.</option>
-												<option value="Mrs">Mrs.</option>
-											</select>
+											{{ Form::select('personal_salutation', ['' => 'SALUTATION*'] + $salutations, Input::old('personal_salutation'), ['class' => 'form-control']) }}
 											@if($errors->has('personal_salutation'))
 												<p class="bg-danger">{{ $errors->first('personal_salutation') }}</p>
 											@endif
@@ -65,21 +60,13 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<select class="form-control" name="gender" id="gender">
-												<option value="" disabled selected>GENDER</option>
-												<option value="0">Male</option>
-												<option value="1">Female</option>
-											</select>
+											{{ Form::select('gender', ['' => 'GENDER'] + $genders, Input::old('gender'), ['class' => 'form-control']) }}
 											@if($errors->has('gender'))
 												<p class="bg-danger">{{ $errors->first('gender') }}</p>
 											@endif
 										</div>
 										<div class="col-lg-4">
-											<select class="form-control" name="status" id="status">
-												<option value="" disabled selected>STATUS</option>
-												<option value="0">Single</option>
-												<option value="1">Married</option>
-											</select>
+											{{ Form::select('status', ['' => 'STATUS'] + $statuses, Input::old('status'), ['class' => 'form-control']) }}
 											@if($errors->has('status'))
 												<p class="bg-danger">{{ $errors->first('status') }}</p>
 											@endif
@@ -101,11 +88,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-8">
-											<select class="form-control" name="hobbies" id="hobbies">
-												<option value="" disabled selected>HOBBIES/INTERESTS</option>
-												<option value="Hobby1">Hobby1</option>
-												<option value="Interest1">Interest1</option>
-											</select>
+											{{ Form::select('hobbies', ['' => 'HOBBIES/INTERESTS'] + $hobbies, Input::old('hobbies'), ['class' => 'form-control']) }}
 											@if($errors->has('hobbies'))
 												<p class="bg-danger">{{ $errors->first('hobbies') }}</p>
 											@endif
@@ -166,21 +149,13 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<select class="form-control" name="home_city" id="home_city">
-												<option value="" disabled selected>CITY*</option>
-												<option value="0">City1</option>
-												<option value="1">City2</option>
-											</select>
+											{{ Form::select('home_city', ['' => 'CITY*'] + $cities, Input::old('home_city'), ['class' => 'form-control']) }}
 											@if($errors->has('home_city'))
 												<p class="bg-danger">{{ $errors->first('home_city') }}</p>
 											@endif
 										</div>
 										<div class="col-lg-4">
-											<select class="form-control" name="home_province" id="home_province">
-												<option value="" disabled selected>PROVINCE</option>
-												<option value="0">Province1</option>
-												<option value="1">Province2</option>
-											</select>
+											{{ Form::select('home_province', ['' => 'PROVINCE'] + $provinces, Input::old('home_province'), ['class' => 'form-control']) }}
 											@if($errors->has('home_province'))
 												<p class="bg-danger">{{ $errors->first('home_province') }}</p>
 											@endif
@@ -211,11 +186,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<select class="form-control" name="business_industry" id="business_industry">
-												<option value="" disabled selected>INDUSTRY*</option>
-												<option value="0">Industry1</option>
-												<option value="1">Industry2</option>
-											</select>
+											{{ Form::select('business_industry', ['' => 'INDUSTRY*'] + $industries, Input::old('business_industry'), ['class' => 'form-control']) }}
 											@if($errors->has('business_industry'))
 												<p class="bg-danger">{{ $errors->first('business_industry') }}</p>
 											@endif
@@ -239,21 +210,13 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<select class="form-control" name="business_city" id="business_city">
-												<option value="" disabled selected>CITY*</option>
-												<option value="0">City1</option>
-												<option value="1">City2</option>
-											</select>
+											{{ Form::select('business_city', ['' => 'CITY*'] + $cities, Input::old('business_city'), ['class' => 'form-control']) }}
 											@if($errors->has('business_city'))
 												<p class="bg-danger">{{ $errors->first('business_city') }}</p>
 											@endif
 										</div>
 										<div class="col-lg-4">
-											<select class="form-control" name="business_province" id="business_province">
-												<option value="" disabled selected>PROVINCE</option>
-												<option value="0">Province1</option>
-												<option value="1">Province2</option>
-											</select>
+											{{ Form::select('business_province', ['' => 'PROVINCE'] + $provinces, Input::old('business_province'), ['class' => 'form-control']) }}
 											@if($errors->has('business_province'))
 												<p class="bg-danger">{{ $errors->first('business_province') }}</p>
 											@endif
@@ -285,14 +248,9 @@
 									</div>
 										<div class="row">
 										<div class="col-lg-4">
-											<select class="form-control" name="personal_salutation" id="personal_salutation">
-												<option value="" disabled selected>SALUTATION</option>
-												<option value="Mr">Mr.</option>
-												<option value="Ms">Ms.</option>
-												<option value="Mrs">Mrs.</option>
-											</select>
-											@if($errors->has('personal_salutation'))
-												<p class="bg-danger">{{ $errors->first('personal_salutation') }}</p>
+											{{ Form::select('spouse_salutation', ['' => 'SALUTATION*'] + $salutations, Input::old('spouse_salutation'), ['class' => 'form-control']) }}
+											@if($errors->has('spouse_salutation'))
+												<p class="bg-danger">{{ $errors->first('spouse_salutation') }}</p>
 											@endif
 										</div>
 									</div>
@@ -326,11 +284,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-8">
-											<select class="form-control" name="spouse_hobbies" id="spouse_hobbies">
-												<option value="" disabled selected>HOBBIES/INTERESTS</option>
-												<option value="Hobby1">Hobby1</option>
-												<option value="Interest1">Interest1</option>
-											</select>
+											{{ Form::select('spouse_hobbies', ['' => 'HOBBIES/INTERESTS'] + $hobbies, Input::old('spouse_hobbies'), ['class' => 'form-control']) }}
 											@if($errors->has('spouse_hobbies'))
 												<p class="bg-danger">{{ $errors->first('spouse_hobbies') }}</p>
 											@endif

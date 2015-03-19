@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => getenv('MAIL_DRIVER'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'sales@bmwcrm.com.ph', 'name' => 'BMW CRM Microsite'),
 
 	/*
 	|--------------------------------------------------------------------------
