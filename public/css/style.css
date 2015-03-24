@@ -26,6 +26,8 @@ body {
 	position: fixed;
 	right: 105px;
 	top: 0;
+	z-index: 999;
+	display: inline-block;
 }
 
 .no-gutter-right {
@@ -68,7 +70,7 @@ span.bg-danger {
 	position: absolute;
 	width: 100%;
 }
-.btn-primary {
+.btn-primary, #page .modal .btn {
 	background: -webkit-linear-gradient(#0195fb, #1a6cd7); /* For Safari 5.1 to 6.0 */
 	background: -o-linear-gradient(#0195fb, #1a6cd7); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(#0195fb, #1a6cd7); /* For Firefox 3.6 to 15 */
@@ -138,14 +140,37 @@ span.bg-danger {
 	outline: none;
 	color: #333333;
 }
-#page select{
+/*#page select {
 	overflow: hidden;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background: #ffffff url("../images/dropdown.png") no-repeat right center;
+}*/
+#page .select2-container--default .select2-selection--single .select2-selection__arrow {
+    background: #ffffff url("../images/dropdown.png") no-repeat right center;
+    width: 30px;
 }
+#page .select2-container--default .select2-selection--single .select2-selection__arrow b {
+	border: 0;
+}
+#page .select2-container--default .select2-selection--single {
+	border: 1px solid #ccc;
+	border-radius: 0;
+	margin-bottom: 10px;
 
+}
+#page .bg-danger {
+	background-color: #F99898;
+}
+#page .radio label::before {
+	border-radius: 0;
+}
+#page .radio label::after {
+	content: '\2714';
+	border-radius: 0;
+	background-color: transparent;
+}
 #survey .input-xs {
 	width: 18px;
 	height: 18px;
@@ -167,14 +192,13 @@ span.bg-danger {
 }
 
 /* Modal */
-#registrationCompleteModal {
+#page .modal {
 	position: fixed;
-	display: inline-block;
 }
-#registrationCompleteModal {
+#page .modal {
 	background-color: rgba(0,0,0,0.8);
 }
-#registrationCompleteModal .modal-content {
+#page .modal .modal-content {
 	border-radius: 0;
 	background-color: transparent;
 	color: #fff;
@@ -182,20 +206,32 @@ span.bg-danger {
 	border: 0;
 	text-align: center;
 }
-#registrationCompleteModal .modal-dialog {
+#page .modal .modal-dialog {
 	margin: 10% auto;
 }
-#registrationCompleteModal h3 {
+#page .modal-title {
 	font-weight: bold;
 	line-height: 30px;
 	margin-bottom: 30px;
 }
-#registrationCompleteModal p {
+#page .modal p {
 	font-size: 16px;
 	line-height: 20px;
-	margin-bottom: 20px;
 }
-#registrationCompleteModal .btn {
+#page .modal .btn-default {
 	font-size: 14px;
 	padding: 5px 35px;
+	font-weight: normal;
+}
+#page .modal-header, #page .modal-footer {
+	border: 0;
+	text-align: center;
+}
+#page .modal-header .close {
+	display: none;
+}
+#page .modal .modal-content h3 {
+	text-align: center;
+	margin: 0 auto!important;
+	padding-bottom: 25px;
 }

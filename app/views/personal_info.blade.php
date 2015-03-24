@@ -19,7 +19,7 @@
 								<div class="col-lg-12">
 									<div class="row">
 										<div class="col-lg-12">
-											<h5>Personal</h5>
+											<h5>Title</h5>
 										</div>
 									</div>
 									<div class="row">
@@ -27,6 +27,12 @@
 											{{ Form::select('personal_salutation', ['' => 'SALUTATION*'] + $salutations, Input::old('personal_salutation'), ['class' => 'form-control']) }}
 											@if($errors->has('personal_salutation'))
 												<p class="bg-danger">{{ $errors->first('personal_salutation') }}</p>
+											@endif
+										</div>
+										<div class="col-lg-4">
+											<input type="text" class="form-control" name="other_personal_salutation" id="other_personal_salutation" placeholder="OTHER SALUTATION"{{ (Input::old('other_personal_salutation')) ? ' value ="' . Input::old('other_personal_salutation') . '"' : '' }}>
+											@if($errors->has('other_personal_salutation'))
+												<p class="bg-danger">{{ $errors->first('other_personal_salutation') }}</p>
 											@endif
 										</div>
 									</div>
@@ -74,7 +80,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="DATE OF BIRTH*"{{ (Input::old('birthdate')) ? ' value ="' . Input::old('birthdate') . '"' : 'DATE OF BIRTH' }}>
+											<input type="text" class="form-control special-date" id="birthdate" name="birthdate" placeholder="DATE OF BIRTH*"{{ (Input::old('birthdate')) ? ' value ="' . Input::old('birthdate') . '"' : '' }}>
 											@if($errors->has('birthdate'))
 												<p class="bg-danger">{{ $errors->first('birthdate') }}</p>
 											@endif
@@ -87,16 +93,22 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-8">
+										<div class="col-lg-6">
 											{{ Form::select('hobbies', ['' => 'HOBBIES/INTERESTS'] + $hobbies, Input::old('hobbies'), ['class' => 'form-control']) }}
 											@if($errors->has('hobbies'))
 												<p class="bg-danger">{{ $errors->first('hobbies') }}</p>
 											@endif
 										</div>
+										<div class="col-lg-6">
+											<input type="text" class="form-control" name="other_hobby" id="other_hobby" placeholder="Others, specify"{{ (Input::old('other_hobby')) ? ' value ="' . Input::old('other_hobby') . '"' : '' }}>
+											@if($errors->has('other_hobby'))
+												<p class="bg-danger">{{ $errors->first('other_hobby') }}</p>
+											@endif
+										</div>
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="MOBILE NUMBER*"{{ (Input::old('mobile_number')) ? ' value ="' . Input::old('mobile_number') . '"' : '' }}>
+											<input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="MOBILE NUMBER"{{ (Input::old('mobile_number')) ? ' value ="' . Input::old('mobile_number') . '"' : '' }}>
 											@if($errors->has('mobile_number'))
 												<p class="bg-danger">{{ $errors->first('mobile_number') }}</p>
 											@endif
@@ -149,13 +161,13 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											{{ Form::select('home_city', ['' => 'CITY*'] + $cities, Input::old('home_city'), ['class' => 'form-control']) }}
+											{{ Form::select('home_city', ['' => 'CITY*'] + $cities, Input::old('home_city'), ['class' => 'form-control', 'id' => 'home_city']) }}
 											@if($errors->has('home_city'))
 												<p class="bg-danger">{{ $errors->first('home_city') }}</p>
 											@endif
 										</div>
 										<div class="col-lg-4">
-											{{ Form::select('home_province', ['' => 'PROVINCE'] + $provinces, Input::old('home_province'), ['class' => 'form-control']) }}
+											{{ Form::select('home_province', ['' => 'PROVINCE'] + $provinces, Input::old('home_province'), ['class' => 'form-control', 'id' => 'home_province']) }}
 											@if($errors->has('home_province'))
 												<p class="bg-danger">{{ $errors->first('home_province') }}</p>
 											@endif
@@ -169,7 +181,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<input type="text" class="form-control" name="home_phone" id="home_phone" placeholder="PHONE NUMBER*"{{ (Input::old('home_phone')) ? ' value ="' . Input::old('home_phone') . '"' : '' }}>
+											<input type="text" class="form-control" name="home_phone" id="home_phone" placeholder="PHONE NUMBER"{{ (Input::old('home_phone')) ? ' value ="' . Input::old('home_phone') . '"' : '' }}>
 											@if($errors->has('home_phone'))
 												<p class="bg-danger">{{ $errors->first('home_phone') }}</p>
 											@endif
@@ -185,7 +197,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-4">
+										<div class="col-lg-6">
 											{{ Form::select('business_industry', ['' => 'INDUSTRY*'] + $industries, Input::old('business_industry'), ['class' => 'form-control']) }}
 											@if($errors->has('business_industry'))
 												<p class="bg-danger">{{ $errors->first('business_industry') }}</p>
@@ -194,7 +206,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12">
-											<input type="text" class="form-control" name="business_address1" id="business_address1" placeholder="ADDRESS 1*"{{ (Input::old('business_address1')) ? ' value ="' . Input::old('business_address1') . '"' : '' }}>
+											<input type="text" class="form-control" name="business_address1" id="business_address1" placeholder="ADDRESS 1"{{ (Input::old('business_address1')) ? ' value ="' . Input::old('business_address1') . '"' : '' }}>
 											@if($errors->has('business_address1'))
 												<p class="bg-danger">{{ $errors->first('business_address1') }}</p>
 											@endif
@@ -202,7 +214,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12">
-											<input type="text" class="form-control" name="business_address2" id="business_address2" placeholder="ADDRESS 2*"{{ (Input::old('business_address2')) ? ' value ="' . Input::old('business_address2') . '"' : '' }}>
+											<input type="text" class="form-control" name="business_address2" id="business_address2" placeholder="ADDRESS 2"{{ (Input::old('business_address2')) ? ' value ="' . Input::old('business_address2') . '"' : '' }}>
 											@if($errors->has('business_address2'))
 												<p class="bg-danger">{{ $errors->first('business_address2') }}</p>
 											@endif
@@ -210,7 +222,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											{{ Form::select('business_city', ['' => 'CITY*'] + $cities, Input::old('business_city'), ['class' => 'form-control']) }}
+											{{ Form::select('business_city', ['' => 'CITY'] + $cities, Input::old('business_city'), ['class' => 'form-control']) }}
 											@if($errors->has('business_city'))
 												<p class="bg-danger">{{ $errors->first('business_city') }}</p>
 											@endif
@@ -246,11 +258,17 @@
 											<p>Spouse's Information</p>
 										</div>
 									</div>
-										<div class="row">
+									<div class="row">
 										<div class="col-lg-4">
 											{{ Form::select('spouse_salutation', ['' => 'SALUTATION*'] + $salutations, Input::old('spouse_salutation'), ['class' => 'form-control']) }}
 											@if($errors->has('spouse_salutation'))
 												<p class="bg-danger">{{ $errors->first('spouse_salutation') }}</p>
+											@endif
+										</div>
+										<div class="col-lg-4">
+											<input type="text" class="form-control" name="other_spouse_salutation" id="other_spouse_salutation" placeholder="OTHER SALUTATION"{{ (Input::old('other_spouse_salutation')) ? ' value ="' . Input::old('other_spouse_salutation') . '"' : '' }}>
+											@if($errors->has('other_spouse_salutation'))
+												<p class="bg-danger">{{ $errors->first('other_spouse_salutation') }}</p>
 											@endif
 										</div>
 									</div>
@@ -270,7 +288,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-4">
-											<input type="date" class="form-control" name="spouse_birthdate" id="spouse_birthdate" placeholder="DATE OF BIRTH"{{ (Input::old('spouse_birthdate')) ? ' value ="' . Input::old('spouse_birthdate') . '"' : '' }}>
+											<input type="text" class="form-control special-date" id="spouse_birthdate" name="spouse_birthdate" placeholder="DATE OF BIRTH*"{{ (Input::old('spouse_birthdate')) ? ' value ="' . Input::old('spouse_birthdate') . '"' : '' }}>
 											@if($errors->has('spouse_birthdate'))
 												<p class="bg-danger">{{ $errors->first('spouse_birthdate') }}</p>
 											@endif
@@ -283,10 +301,16 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-8">
+										<div class="col-lg-6">
 											{{ Form::select('spouse_hobbies', ['' => 'HOBBIES/INTERESTS'] + $hobbies, Input::old('spouse_hobbies'), ['class' => 'form-control']) }}
 											@if($errors->has('spouse_hobbies'))
 												<p class="bg-danger">{{ $errors->first('spouse_hobbies') }}</p>
+											@endif
+										</div>
+										<div class="col-lg-6">
+											<input type="text" class="form-control" name="other_spouse_hobby" id="other_spouse_hobby" placeholder="Others, specify"{{ (Input::old('other_spouse_hobby')) ? ' value ="' . Input::old('other_spouse_hobby') . '"' : '' }}>
+											@if($errors->has('other_spouse_hobby'))
+												<p class="bg-danger">{{ $errors->first('other_spouse_hobby') }}</p>
 											@endif
 										</div>
 									</div>

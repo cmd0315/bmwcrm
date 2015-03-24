@@ -32,7 +32,8 @@
     color: #555555; }
 .checkbox input[type="checkbox"] {
     opacity: 0;
-    z-index: 1; }
+    z-index: 1;
+    cursor: pointer; }
 .checkbox input[type="checkbox"]:focus + label::before {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;

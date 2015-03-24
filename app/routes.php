@@ -60,3 +60,8 @@ Route::group(array('before' => 'guest'), function(){
 	]);
 
 });
+
+Route::get('city_dropdown',[
+	'as' => 'participants.getCities',
+	'uses' => 'ParticipantsController@getCities'
+]);

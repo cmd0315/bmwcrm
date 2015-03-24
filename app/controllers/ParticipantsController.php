@@ -50,7 +50,7 @@ class ParticipantsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+
 	}
 
 
@@ -63,15 +63,16 @@ class ParticipantsController extends \BaseController {
 	public function create($registration_id)
 	{
 		$registration = $this->registrationRepository->getRegistrationByRegID($registration_id);
-		$salutations = ['Mr' => 'Mr.', 'Ms' => 'Ms.', 'Mrs' => 'Mrs.'];
+		$salutations = ['Mr' => 'Mr.', 'Ms' => 'Ms.', 'Mrs' => 'Mrs.', 'Dr' => 'Dr.', 'Atty' => 'Atty.', 'Engr' => 'Engr.', 'Arch' => 'Arch.', 'Prof' => 'Prof.'];
 		$genders = ['Male' => 'Male', 'Female' => 'Female'];
-		$statuses = ['Single' => 'Single', 'Married' => 'Married'];
-		$hobbies = ['Golfing' => 'Golfing', 'Race car driving' => 'Race car driving', 'Collecting vintage cars' => 'Collecting vintage cars', 'Collecting art' => 'Collecting art', 'Traveling' => 'Traveling', 'Sailing and yachting' => 'Sailing and yachting', 'Mountain climbing' => 'Mountain climbing', 'Horse riding' => 'Horse riding'];
+		$statuses = ['Single' => 'Single', 'Married' => 'Married', 'Divorced' => 'Divorced', 'Separated' => 'Separated', 'Annulled' => 'Annulled', 'Widowed' => 'Widowed'];
+		$hobbies = ['Art' => 'Art', 'Fashion' => 'Fashion', 'F1/Motorsports' => 'F1/Motorsports', 'Golf' => 'Golf', 'Movies' => 'Movies', 'Sports' => 'Sports', 'Theatre/Opera/Musicals' => 'Theatre/Opera/Musicals', 'Travel' => 'Travel', 'Wine & Dine' => 'Wine & Dine'];
 		$industries = ['Automobile' => 'Automobile', 'Food and beverages' => 'Food and beverages', 'Personal and household goods' => 'Personal and household goods', 'Media' => 'Media', 'Retail' => 'Retail', 'Travel and leisure' => 'Travel and leisure', 'Banking' => 'Banking', 'Real Estate' => 'Real Estate', 'Health care' => 'Health care', 'Industrial' => 'Industrial', 'Telecommunication' => 'Telecommunication', 'Technology' => 'Technology', 'Oil and gas' => 'Oil and gas', 'Utilities' => 'Utilities'];
 
 		$cities = $this->locations->getCities();
+
+		// $cities = [];
 		$provinces = $this->locations->getProvinces();
-		
 		return View::make('personal_info', ['pageTitle' => 'Customer Information'], compact('registration', 'salutations', 'genders', 'statuses', 'hobbies', 'industries', 'cities', 'provinces'));
 	}
 
@@ -83,7 +84,7 @@ class ParticipantsController extends \BaseController {
 	 */
 	public function store($registration_id)
 	{
-		$input = Input::only('personal_salutation', 'first_name', 'middle_initial', 'last_name', 'nickname', 'gender', 'status', 'birthdate', 'age', 'hobbies', 'mobile_number', 'email_address', 'occupation', 'company_name', 'home_address1', 'home_address2', 'home_city', 'home_province', 'home_zip_code', 'home_phone', 'business_industry', 'business_address1', 'business_address2', 'business_city', 'business_province', 'business_zip_code', 'business_phone', 'spouse_salutation', 'spouse_first_name', 'spouse_last_name', 'spouse_birthdate', 'spouse_age', 'spouse_hobbies');
+		$input = Input::only('personal_salutation', 'other_personal_salutation', 'first_name', 'middle_initial', 'last_name', 'nickname', 'gender', 'status', 'birthdate', 'age', 'hobbies', 'other_hobby', 'mobile_number', 'email_address', 'occupation', 'company_name', 'home_address1', 'home_address2', 'home_city', 'home_province', 'home_zip_code', 'home_phone', 'business_industry', 'business_address1', 'business_address2', 'business_city', 'business_province', 'business_zip_code', 'business_phone', 'spouse_salutation', 'other_spouse_salutation', 'spouse_first_name', 'spouse_last_name', 'spouse_birthdate', 'spouse_age', 'spouse_hobbies', 'other_spouse_hobby');
 
 		// Check form for error
 		try {
@@ -99,7 +100,7 @@ class ParticipantsController extends \BaseController {
 			extract($input);
 			// Execute command to insert contact person data
 			$participantRegistration = $this->execute(
-				new ParticipantRegistrationCommand($registration->registration_id, $personal_salutation, $first_name, $middle_initial, $last_name, $nickname, $gender, $status, $birthdate, $age, $hobbies, $mobile_number, $email_address, $occupation, $company_name, $home_address1, $home_address2, $home_city, $home_province, $home_zip_code, $home_phone, $business_industry, $business_address1, $business_address2, $business_city, $business_province, $business_zip_code, $business_phone, $spouse_salutation, $spouse_first_name, $spouse_last_name, $spouse_birthdate, $spouse_age, $spouse_hobbies)
+				new ParticipantRegistrationCommand($registration->registration_id, $personal_salutation, $other_personal_salutation, $first_name, $middle_initial, $last_name, $nickname, $gender, $status, $birthdate, $age, $hobbies, $other_hobby, $mobile_number, $email_address, $occupation, $company_name, $home_address1, $home_address2, $home_city, $home_province, $home_zip_code, $home_phone, $business_industry, $business_address1, $business_address2, $business_city, $business_province, $business_zip_code, $business_phone, $spouse_salutation, $other_spouse_salutation, $spouse_first_name, $spouse_last_name, $spouse_birthdate, $spouse_age, $spouse_hobbies, $other_spouse_hobby)
 			);
 
 			if($participantRegistration) {
@@ -113,41 +114,11 @@ class ParticipantsController extends \BaseController {
 	}
 
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+	public function getCities() {
+		$input = Input::only('option');
+		$cities = $this->locations->getCitiesByProvince($input);
+		return Response::make($cities);
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Remove the specified resource from storage.

@@ -10,7 +10,7 @@ class TermsForm extends FormValidator {
 	 * @var array
 	 */
 	protected $rules = [
-		'accept_terms' => 'required'
+		'accept_terms' => 'accepted'
 	];
 
 

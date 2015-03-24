@@ -28,56 +28,26 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned1" value="BMW">
-														<label for="vehicles_owned1">BMW</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned2" value="VOLVO">
-														<label for="vehicles_owned2">VOLVO</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned3" value="CHEVROLET">
-														<label for="vehicles_owned3">CHEVROLET</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned4" value="MITSUBISHI">
-														<label for="vehicles_owned4">MITSUBISHI</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned5" value="NISSAN">
-														<label for="vehicles_owned5">NISSAN</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned6" value="MERCEDES BENZ">
-														<label for="vehicles_owned6">MERCEDES BENZ</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned7" value="PORSCHE">
-														<label for="vehicles_owned7">PORSCHE</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned8" value="TOYOTA">
-														<label for="vehicles_owned8">TOYOTA</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned9" value="KIA">
-														<label for="vehicles_owned9">KIA</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned10" value="AUDI">
-														<label for="vehicles_owned10">AUDI</label><br>
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned11" value="VOLKSWAGEN">
-														<label for="vehicles_owned11">VOLKSWAGEN</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned12" value="HONDA">
-														<label for="vehicles_owned12">HONDA</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned13" value="MAZDA">
-														<label for="vehicles_owned13">MAZDA</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned14" value="PEUGEOT">
-														<label for="vehicles_owned14">PEUGEOT</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned15" value="LEXUS">
-														<label for="vehicles_owned15">LEXUS</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned16" value="SUBARU">
-														<label for="vehicles_owned16">SUBARU</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned17" value="FORD">
-														<label for="vehicles_owned17">FORD</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned18" value="HYUNDAI">
-														<label for="vehicles_owned18">HYUNDAI</label><br>
-														<input type="checkbox" name="vehicles_owned[]" id="vehicles_owned19" value="checked">
-														<label for="vehicles_owned19">OTHERS</label><br>
-													</div>
-													<input type="text" class="form-control" name="other_vehicles_owned" id="other_vehicles_owned" placeholder="OTHER VEHICLES OWNED">
-													@if($errors->has('other_vehicles_owned'))
-														<p class="bg-danger">{{ $errors->first('other_vehicles_owned') }}</p>
+												<?php $counter = 0; ?>
+												@foreach($vehicles_owned as $vehicle_owned)
+													@if( $counter===0 or $counter==10)
+														<div class="col-lg-6"><div class="checkbox">
 													@endif
-												</div>
+													<input type="checkbox" name="vehicles_owned[]" id="{{ 'vehicle_owned' . $counter}}" value="{{ $vehicle_owned }}" <?php if(Input::old('vehicles_owned')): if(in_array($vehicle_owned, Input::old('vehicles_owned'))): echo ' checked'; endif; endif;?>>
+													<label for="{{ 'vehicle_owned' . $counter}}">{{ $vehicle_owned }}</label><br>
+
+													@if($counter!==0 and ($counter==9 or $counter==18))
+														</div>
+															@if($counter==18)
+																<input type="text" class="form-control" name="other_vehicles_owned" id="other_vehicles_owned" placeholder="OTHER VEHICLE OWNED"{{ (Input::old('other_vehicles_owned')) ? ' value ="' . Input::old('other_vehicles_owned') . '"' : 'hi' . $counter }}>
+																@if($errors->has('other_vehicles_owned'))
+																	<p class="bg-danger">{{ $errors->first('other_vehicles_owned') }}</p>
+																@endif
+															@endif
+														</div>
+													@endif
+													<?php $counter++; ?>
+												@endforeach
 											</div>
 										</div>
 									</div>
@@ -86,7 +56,7 @@
 											<p>2. Which fuel type do you prefer?<span class="text-info">*</span></p>
 										</div>
 										<div class="col-lg-4">
-											{{ Form::select('fuel', ['' => 'FUEL'] + $fuels, Input::old('fuel'), ['class' => 'form-control']) }}
+											{{ Form::select('fuel', ['' => 'FUEL*'] + $fuels, Input::old('fuel'), ['class' => 'form-control']) }}
 											@if($errors->has('fuel'))
 												<p class="bg-danger">{{ $errors->first('fuel') }}</p>
 											@endif
@@ -103,34 +73,26 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="car_body_type[]" id="car_body_type1" value="SEDAN">
-														<label for="car_body_type1">SEDAN</label><br>
-														<input type="checkbox" name="car_body_type[]" id="car_body_type2" value="SUV">
-														<label for="car_body_type2">SUV</label><br>
-														<input type="checkbox" name="car_body_type[]" id="car_body_type3" value="AUV">
-														<label for="car_body_type3">AUV</label><br>
-														<input type="checkbox" name="car_body_type[]" id="car_body_type4" value="HATCHBACK">
-														<label for="car_body_type4">HATCHBACK</label><br>
-														<input type="checkbox" name="car_body_type[]" id="car_body_type5" value="MULTI-PURPOSE VEHICLE">
-														<label for="car_body_type5">MULTI-PURPOSE VEHICLE</label><br>
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="car_body_type[]" id="car_body_type6" value="VAN">
-														<label for="car_body_type6">VAN</label><br>
-														<input type="checkbox" name="car_body_type[]" id="car_body_type7" value="COUPE">
-														<label for="car_body_type7">COUPE</label><br>
-														<input type="checkbox" name="car_body_type[]" id="car_body_type8" value="checked">
-														<label for="car_body_type8">OTHERS</label><br>
-													</div>
-													<input type="text" class="form-control" name="other_car_body_type" id="other_car_body_type" placeholder="OTHER CAR BODY TYPE">
-													@if($errors->has('other_car_body_type'))
-														<p class="bg-danger">{{ $errors->first('other_car_body_type') }}</p>
+												<?php $counter = 0; ?>
+												@foreach($car_body_types as $car_body_type)
+													@if( $counter===0 or $counter==5)
+														<div class="col-lg-6"><div class="checkbox">
 													@endif
-												</div>
+													<input type="checkbox" name="car_body_type[]" id="{{ 'car_body_type' . $counter}}" value="{{ $car_body_type }}" <?php if(Input::old('car_body_type')): if(in_array($car_body_type, Input::old('car_body_type'))): echo ' checked'; endif; endif;?>>
+													<label for="{{ 'car_body_type' . $counter}}">{{ $car_body_type }}</label><br>
+
+													@if($counter!==0 and ($counter==4 or $counter==7))
+														</div>
+															@if($counter==7)
+																<input type="text" class="form-control" name="other_car_body_type" id="other_car_body_type" placeholder="OTHER CAR BODY TYPE"{{ (Input::old('other_car_body_type')) ? ' value ="' . Input::old('other_car_body_type') . '"' : '' }}>
+																@if($errors->has('other_car_body_type'))
+																	<p class="bg-danger">{{ $errors->first('other_car_body_type') }}</p>
+																@endif
+															@endif
+														</div>
+													@endif
+													<?php $counter++; ?>
+												@endforeach
 											</div>
 										</div>
 									</div>
@@ -145,40 +107,26 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="car_colors[]" id="car_colors1" value="WHITE">
-														<label for="car_colors1">WHITE</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors2" value="BLUE">
-														<label for="car_colors2">BLUE</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors3" value="YELLOW">
-														<label for="car_colors3">YELLOW</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors4" value="BLACK">
-														<label for="car_colors4">BLACK</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors5" value="RED">
-														<label for="car_colors5">RED</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors6" value="GREEN">
-														<label for="car_colors6">GREEN</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors7" value="SILVER">
-														<label for="car_colors7">SILVER</label><br>
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="car_colors[]" id="car_colors8" value="BROWN">
-														<label for="car_colors8">BROWN</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors9" value="PINK">
-														<label for="car_colors9">PINK</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors10" value="GRAY">
-														<label for="car_colors10">GRAY</label><br>
-														<input type="checkbox" name="car_colors[]" id="car_colors11" value="checked">
-														<label for="car_colors11">OTHERS</label><br>
-													</div>
-													<input type="text" class="form-control" name="other_car_color" id="other_car_color" placeholder="OTHER CAR COLOR">
-													@if($errors->has('other_car_color'))
-														<p class="bg-danger">{{ $errors->first('other_car_color') }}</p>
+												<?php $counter = 0; ?>
+												@foreach($car_colors as $car_color)
+													@if( $counter===0 or $counter==7)
+														<div class="col-lg-6"><div class="checkbox">
 													@endif
-												</div>
+													<input type="checkbox" name="car_colors[]" id="{{ 'car_color' . $counter}}" value="{{ $car_color }}" <?php if(Input::old('car_colors')): if(in_array($car_color, Input::old('car_colors'))): echo ' checked'; endif; endif;?>>
+													<label for="{{ 'car_color' . $counter}}">{{ $car_color }}</label><br>
+
+													@if($counter!==0 and ($counter==6 or $counter==10))
+														</div>
+															@if($counter==10)
+																<input type="text" class="form-control" name="other_car_color" id="other_car_color" placeholder="OTHER CAR COLOR"{{ (Input::old('other_car_color')) ? ' value ="' . Input::old('other_car_color') . '"' : '' }}>
+																@if($errors->has('other_car_color'))
+																	<p class="bg-danger">{{ $errors->first('other_car_color') }}</p>
+																@endif
+															@endif
+														</div>
+													@endif
+													<?php $counter++; ?>
+												@endforeach
 											</div>
 										</div>
 									</div>
@@ -193,22 +141,19 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="upholstery_color" id="upholstery_color1" value="LIGHT (White, beige, light brown)">
-														<label for="upholstery_color1">LIGHT (White, beige, light brown)</label><br>
-														<input type="checkbox" name="upholstery_color" id="upholstery_color2" value="DARK (Black, gray, dark brown)">
-														<label for="upholstery_color2">DARK (Black, gray, dark brown)</label><br>
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="upholstery_color" id="upholstery_color3" value="COMBINATION">
-														<label for="upholstery_color3">COMBINATION</label><br>
-														<input type="checkbox" name="upholstery_color" id="upholstery_color4" value="NOTHING IN PARTICULAR">
-														<label for="upholstery_color4">NOTHING IN PARTICULAR</label><br>
-													</div>
-												</div>
+												<?php $counter = 0; ?>
+												@foreach($upholstery_colors as $upholstery_color)
+													@if( $counter===0 or $counter==2)
+														<div class="col-lg-6"><div class="radio">
+													@endif
+													<input type="radio" name="upholstery_color" id="{{ 'upholstery_color' . $counter}}" value="{{ $upholstery_color }}" <?php if(Input::old('upholstery_color')): if(strcasecmp(Input::old('upholstery_color'), $upholstery_color) === 0): echo 'checked'; endif; endif; ?>>
+													<label for="{{ 'upholstery_color' . $counter}}">{{ $upholstery_color }}</label><br>
+
+													@if($counter!==0 and ($counter==1 or $counter==3))
+														</div></div>
+													@endif
+													<?php $counter++; ?>
+												@endforeach
 											</div>
 										</div>
 									</div>
@@ -221,69 +166,69 @@
 											</div>
 											<div class="row">
 												<div class="col-lg-6">
-													<input type="text" class="input-xs" name="rating_exterior_design" id="rating_exterior_design">
+													<input type="text" class="input-xs" name="rating_exterior_design" id="rating_exterior_design" maxlength="2"{{ (Input::old('rating_exterior_design')) ? ' value ="' . Input::old('rating_exterior_design') . '"' : '' }}>
 													<label for="rating_exterior_design">EXTERIOR DESIGN</label><br>
 													@if($errors->has('rating_exterior_design'))
 														<p class="bg-danger">{{ $errors->first('rating_exterior_design') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_interior_design" id="rating_interior_design">
+													<input type="text" class="input-xs" name="rating_interior_design" id="rating_interior_design" maxlength="2"{{ (Input::old('rating_interior_design')) ? ' value ="' . Input::old('rating_interior_design') . '"' : '' }}>
 													<label for="rating_interior_design">INTERIOR DESIGN</label><br>
 													@if($errors->has('rating_interior_design'))
 														<p class="bg-danger">{{ $errors->first('rating_interior_design') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_engine_power" id="rating_engine_power">
+													<input type="text" class="input-xs" name="rating_engine_power" id="rating_engine_power" maxlength="2"{{ (Input::old('rating_engine_power')) ? ' value ="' . Input::old('rating_engine_power') . '"' : '' }}>
 													<label for="rating_engine_power">ENGINE POWER</label><br>
 													@if($errors->has('rating_engine_power'))
 														<p class="bg-danger">{{ $errors->first('rating_engine_power') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_handling" id="rating_handling">
+													<input type="text" class="input-xs" name="rating_handling" id="rating_handling" maxlength="2"{{ (Input::old('rating_handling')) ? ' value ="' . Input::old('rating_handling') . '"' : '' }}>
 													<label for="rating_handling">HANDLING</label><br>
 													@if($errors->has('rating_handling'))
 														<p class="bg-danger">{{ $errors->first('rating_handling') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_comfort_luxury" id="rating_comfort_luxury">
+													<input type="text" class="input-xs" name="rating_comfort_luxury" id="rating_comfort_luxury" maxlength="2"{{ (Input::old('rating_comfort_luxury')) ? ' value ="' . Input::old('rating_comfort_luxury') . '"' : '' }}>
 													<label for="rating_comfort_luxury">COMFORT/LUXURY</label><br>
 													@if($errors->has('rating_comfort_luxury'))
 														<p class="bg-danger">{{ $errors->first('rating_comfort_luxury') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_technology" id="rating_technology">
+													<input type="text" class="input-xs" name="rating_technology" id="rating_technology" maxlength="2"{{ (Input::old('rating_technology')) ? ' value ="' . Input::old('rating_technology') . '"' : '' }}>
 													<label for="rating_technology">TECHNOLOGY</label><br>
 													@if($errors->has('rating_technology'))
 														<p class="bg-danger">{{ $errors->first('rating_technology') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_safety" id="rating_safety">
+													<input type="text" class="input-xs" name="rating_safety" id="rating_safety" maxlength="2"{{ (Input::old('rating_safety')) ? ' value ="' . Input::old('rating_safety') . '"' : '' }}>
 													<label for="rating_safety">SAFETY</label><br>
 													@if($errors->has('rating_safety'))
 														<p class="bg-danger">{{ $errors->first('rating_safety') }}</p>
 													@endif
 												</div>
 												<div class="col-lg-6">
-													<input type="text" class="input-xs" name="rating_brand" id="rating_brand">
+													<input type="text" class="input-xs" name="rating_brand" id="rating_brand" maxlength="2"{{ (Input::old('rating_brand')) ? ' value ="' . Input::old('rating_brand') . '"' : '' }}>
 													<label for="rating_brand">BRAND</label><br>
 													@if($errors->has('rating_brand'))
 														<p class="bg-danger">{{ $errors->first('rating_brand') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_fuel_economy" id="rating_fuel_economy">
+													<input type="text" class="input-xs" name="rating_fuel_economy" id="rating_fuel_economy" maxlength="2"{{ (Input::old('rating_fuel_economy')) ? ' value ="' . Input::old('rating_fuel_economy') . '"' : '' }}>
 													<label for="rating_fuel_economy">FUEL ECONOMY</label><br>
 													@if($errors->has('rating_fuel_economy'))
 														<p class="bg-danger">{{ $errors->first('rating_fuel_economy') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_pricing" id="rating_fuel_pricing">
+													<input type="text" class="input-xs" name="rating_pricing" id="rating_pricing" maxlength="2"{{ (Input::old('rating_pricing')) ? ' value ="' . Input::old('rating_pricing') . '"' : '' }}>
 													<label for="rating_pricing">PRICING</label><br>
 													@if($errors->has('rating_pricing'))
 														<p class="bg-danger">{{ $errors->first('rating_pricing') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_maintenance_cost" id="rating_maintenance_cost">
+													<input type="text" class="input-xs" name="rating_maintenance_cost" id="rating_maintenance_cost" maxlength="2"{{ (Input::old('rating_maintenance_cost')) ? ' value ="' . Input::old('rating_maintenance_cost') . '"' : '' }}>
 													<label for="rating_maintenance_cost">MAINTENANCE COST</label><br>
 													@if($errors->has('rating_maintenance_cost'))
 														<p class="bg-danger">{{ $errors->first('rating_maintenance_cost') }}</p>
 													@endif
-													<input type="text" class="input-xs" name="rating_others" id="rating_others">
+													<input type="text" class="input-xs" name="rating_others" id="rating_others" maxlength="2"{{ (Input::old('rating_others')) ? ' value ="' . Input::old('rating_others') . '"' : '' }}>
 													<label for="rating_others">OTHERS</label><br>
 													@if($errors->has('rating_others'))
 														<p class="bg-danger">{{ $errors->first('rating_others') }}</p>
 													@endif
-													<input type="text" class="form-control" name="other_rating" id="other_rating" placeholder="OTHER RATING">
+													<input type="text" class="form-control" name="other_rating" id="other_rating" placeholder="OTHER RATING"{{ (Input::old('other_rating')) ? ' value ="' . Input::old('other_rating') . '"' : '' }}>
 													@if($errors->has('other_rating'))
 														<p class="bg-danger">{{ $errors->first('other_rating') }}</p>
 													@endif
@@ -302,54 +247,26 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="car_choices[]" id="car_choices1" value="HYUNDAI">
-														<label for="car_choices1">HYUNDAI</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices2" value="VOLVO">
-														<label for="car_choices2">VOLVO</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices3" value="CHEVROLET">
-														<label for="car_choices3">CHEVROLET</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices4" value="MITSUBISHI">
-														<label for="car_choices4">MITSUBISHI</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices5" value="NISSAN">
-														<label for="car_choices5">NISSAN</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices6" value="MERCEDES BENZ">
-														<label for="car_choices6">MERCEDES BENZ</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices7" value="PORSCHE">
-														<label for="car_choices7">PORSCHE</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices8" value="TOYOTA">
-														<label for="car_choices8">TOYOTA</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices9" value="KIA">
-														<label for="car_choices9">KIA</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices10" value="AUDI">
-														<label for="car_choices10">AUDI</label><br>
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="car_choices[]" id="car_choices11" value="VOLKSWAGEN">
-														<label for="car_choices11">VOLKSWAGEN</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices12" value="HONDA">
-														<label for="car_choices12">HONDA</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices13" value="MAZDA">
-														<label for="car_choices13">MAZDA</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices14" value="PEUGEOT">
-														<label for="car_choices14">PEUGEOT</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices15" value="LEXUS">
-														<label for="car_choices15">LEXUS</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices16" value="SUBARU">
-														<label for="car_choices16">SUBARU</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices17" value="FORD">
-														<label for="car_choices17">FORD</label><br>
-														<input type="checkbox" name="car_choices[]" id="car_choices18" value="checked">
-														<label for="car_choices18">OTHERS</label><br>
-													</div>
-													<input type="text" class="form-control" name="other_car_choice" id="other_car_choice" placeholder="OTHER CAR CHOICE">
-													@if($errors->has('other_car_choice'))
-														<p class="bg-danger">{{ $errors->first('other_car_choice') }}</p>
+												<?php $counter = 0; ?>
+												@foreach($car_choices as $car_choice)
+													@if( $counter===0 or $counter==10)
+														<div class="col-lg-6"><div class="checkbox">
 													@endif
-												</div>
+													<input type="checkbox" name="car_choices[]" id="{{ 'car_choice' . $counter}}" value="{{ $car_choice }}" <?php if(Input::old('car_choices')): if(in_array($car_choice, Input::old('car_choices'))): echo ' checked'; endif; endif;?>>
+													<label for="{{ 'car_choice' . $counter}}">{{ $car_choice }}</label><br>
+
+													@if($counter!==0 and ($counter==9 or $counter==17))
+														</div>
+															@if($counter==17)
+																<input type="text" class="form-control" name="other_car_choice" id="other_car_choice" placeholder="OTHER CAR CHOICE"{{ (Input::old('other_car_choice')) ? ' value ="' . Input::old('other_car_choice') . '"' : '' }}>
+																@if($errors->has('other_car_choice'))
+																	<p class="bg-danger">{{ $errors->first('other_car_choice') }}</p>
+																@endif
+															@endif
+														</div>
+													@endif
+													<?php $counter++; ?>
+												@endforeach
 											</div>
 										</div>
 									</div>
@@ -364,42 +281,26 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw1" value="EXTERIOR DESIGN">
-														<label for="why_buy_a_bmw1">EXTERIOR DESIGN</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw2" value="INTERIOR DESIGN">
-														<label for="why_buy_a_bmw2">INTERIOR DESIGN</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw3" value="ENGINE POWER">
-														<label for="why_buy_a_bmw3">ENGINE POWER</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw4" value="HANDLING">
-														<label for="why_buy_a_bmw4">HANDLING</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw5" value="COMFORT/LUXURY">
-														<label for="why_buy_a_bmw5">COMFORT/LUXURY</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw6" value="TECHNOLOGY">
-														<label for="why_buy_a_bmw6">TECHNOLOGY</label><br>
-													</div>
-												</div>
-												<div class="col-lg-6">
-													<div class="checkbox">
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw7" value="SAFETY">
-														<label for="why_buy_a_bmw7">SAFETY</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw8" value="BRAND">
-														<label for="why_buy_a_bmw8">BRAND</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw9" value="FUEL ECONOMY">
-														<label for="why_buy_a_bmw9">FUEL ECONOMY</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw10" value="PRICING">
-														<label for="why_buy_a_bmw10">PRICING</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw11" value="MAINTENANCE COST">
-														<label for="why_buy_a_bmw11">MAINTENANCE COST</label><br>
-														<input type="checkbox" name="why_buy_a_bmw[]" id="why_buy_a_bmw12" value="checked">
-														<label for="why_buy_a_bmw12">OTHERS</label><br>
-													</div>
-													<input type="text" class="form-control" name="other_why_buy_a_bmw" id="other_why_buy_a_bmw" placeholder="OTHER WHY BUY A BMW">
-													@if($errors->has('other_why_buy_a_bmw'))
-														<p class="bg-danger">{{ $errors->first('other_why_buy_a_bmw') }}</p>
+												<?php $counter = 0; ?>
+												@foreach($buy_bmw_reasons as $buy_bmw_reason)
+													@if( $counter===0 or $counter==7)
+														<div class="col-lg-6"><div class="checkbox">
 													@endif
-												</div>
+													<input type="checkbox" name="why_buy_a_bmw[]" id="{{ 'buy_bmw_reason' . $counter}}" value="{{ $buy_bmw_reason }}" <?php if(Input::old('why_buy_a_bmw')): if(in_array($buy_bmw_reason, Input::old('why_buy_a_bmw'))): echo ' checked'; endif; endif;?>>
+													<label for="{{ 'buy_bmw_reason' . $counter}}">{{ $buy_bmw_reason }}</label><br>
+
+													@if($counter!==0 and ($counter==6 or $counter==11))
+														</div>
+															@if($counter==11)
+																<input type="text" class="form-control" name="other_why_buy_a_bmw" id="other_why_buy_a_bmw" placeholder="OTHER WHY BUY A BMW"{{ (Input::old('other_why_buy_a_bmw')) ? ' value ="' . Input::old('other_why_buy_a_bmw') . '"' : '' }}>
+																@if($errors->has('other_why_buy_a_bmw'))
+																	<p class="bg-danger">{{ $errors->first('other_why_buy_a_bmw') }}</p>
+																@endif
+															@endif
+														</div>
+													@endif
+													<?php $counter++; ?>
+												@endforeach
 											</div>
 										</div>
 									</div>

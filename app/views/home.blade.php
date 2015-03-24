@@ -18,7 +18,7 @@
 				<div class="form-group">
 					<div class="col-md-12">
 						<div class="checkbox">
-							<input type="checkbox" name="accept_terms" id="accept_terms" value="OTHERS">
+							<input type="checkbox" name="accept_terms" id="accept_terms" value="1">
 							<label for="accept_terms">I have read this Agreement and agree to the Terms & Conditions</label><br>
 							@if($errors->has('accept_terms'))
 								<p class="bg-danger">{{ $errors->first('accept_terms') }}</p>

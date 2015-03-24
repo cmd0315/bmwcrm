@@ -24,7 +24,7 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'registration_id', 'personal_salutation', 'first_name', 'middle_initial', 'last_name', 'nickname', 'gender', 'status', 'birthdate', 'age', 'hobbies', 'mobile_number', 'email_address', 'occupation', 'company_name', 'home_address1', 'home_address2', 'home_city', 'home_province', 'home_zip_code', 'home_phone', 'business_industry', 'business_address1', 'business_address2', 'business_city', 'business_province', 'business_zip_code', 'business_phone', 'spouse_salutation', 'spouse_first_name', 'spouse_last_name', 'spouse_birthdate', 'spouse_age', 'spouse_hobbies'];
+	protected $fillable = ['id', 'registration_id', 'personal_salutation', 'other_personal_salutation', 'first_name', 'middle_initial', 'last_name', 'nickname', 'gender', 'status', 'birthdate', 'age', 'hobbies', 'other_hobby', 'mobile_number', 'email_address', 'occupation', 'company_name', 'home_address1', 'home_address2', 'home_city', 'home_province', 'home_zip_code', 'home_phone', 'business_industry', 'business_address1', 'business_address2', 'business_city', 'business_province', 'business_zip_code', 'business_phone', 'spouse_salutation', 'other_spouse_salutation', 'spouse_first_name', 'spouse_last_name', 'spouse_birthdate', 'spouse_age', 'spouse_hobbies', 'other_spouse_hobby'];
 
 	 /**
     * Required for softdeletion of records
@@ -49,9 +49,9 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     * @param mixed
     * @return Registration
     */
-    public static function add($registration_id, $personal_salutation, $first_name, $middle_initial, $last_name, $nickname, $gender, $status, $birthdate, $age, $hobbies, $mobile_number, $email_address, $occupation, $company_name, $home_address1, $home_address2, $home_city, $home_province, $home_zip_code, $home_phone, $business_industry, $business_address1, $business_address2, $business_city, $business_province, $business_zip_code, $business_phone, $spouse_salutation, $spouse_first_name, $spouse_last_name, $spouse_birthdate, $spouse_age, $spouse_hobbies) {
+    public static function add($registration_id, $personal_salutation, $other_personal_salutation, $first_name, $middle_initial, $last_name, $nickname, $gender, $status, $birthdate, $age, $hobbies, $other_hobby, $mobile_number, $email_address, $occupation, $company_name, $home_address1, $home_address2, $home_city, $home_province, $home_zip_code, $home_phone, $business_industry, $business_address1, $business_address2, $business_city, $business_province, $business_zip_code, $business_phone, $spouse_salutation, $other_spouse_salutation, $spouse_first_name, $spouse_last_name, $spouse_birthdate, $spouse_age, $spouse_hobbies, $other_spouse_hobby) {
 
-		$participant = new static(compact('registration_id', 'personal_salutation', 'first_name', 'middle_initial', 'last_name', 'nickname', 'gender', 'status', 'birthdate', 'age', 'hobbies', 'mobile_number', 'email_address', 'occupation', 'company_name', 'home_address1', 'home_address2', 'home_city', 'home_province', 'home_zip_code', 'home_phone', 'business_industry', 'business_address1', 'business_address2', 'business_city', 'business_province', 'business_zip_code', 'business_phone', 'spouse_salutation', 'spouse_first_name', 'spouse_last_name', 'spouse_birthdate', 'spouse_age', 'spouse_hobbies'));
+		$participant = new static(compact('registration_id', 'personal_salutation', 'other_personal_salutation', 'first_name', 'middle_initial', 'last_name', 'nickname', 'gender', 'status', 'birthdate', 'age', 'hobbies', 'other_hobby', 'mobile_number', 'email_address', 'occupation', 'company_name', 'home_address1', 'home_address2', 'home_city', 'home_province', 'home_zip_code', 'home_phone', 'business_industry', 'business_address1', 'business_address2', 'business_city', 'business_province', 'business_zip_code', 'business_phone', 'spouse_salutation', 'other_spouse_salutation', 'spouse_first_name', 'spouse_last_name', 'spouse_birthdate', 'spouse_age', 'spouse_hobbies', 'other_spouse_hobby'));
 
 		return $participant;
     }
@@ -62,7 +62,16 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     * @return String
     */
     public function getNameAttribute() {
-        return $name = ucfirst($this->first_name) . ' ' . ucfirst($this->middle_initial) . '. ' . ucfirst($this->last_name);
+        $name = '';
+
+        if($this->middle_initial) {
+            $name = ucfirst($this->first_name) . ' ' . ucfirst($this->middle_initial) . '. ' . ucfirst($this->last_name);
+        }
+        else {
+            $name = ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        }
+        
+        return $name;
     }
 
 

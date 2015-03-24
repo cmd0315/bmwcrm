@@ -54,4 +54,8 @@ class LocationRepository {
 		return array_unique($provinces);
 	}
 
+	public function getCitiesByProvince($province) {
+		return Location::where('area_name', '=', $province)->orderBy('city')->lists('city', 'city');
+	}
+
 }

@@ -1,0 +1,13 @@
+/*
+Responsive CSS
+*/
+@media screen and (max-width: 990px){
+	#page .ci-box {
+		width: 100%;
+		right: 0;
+  		background-color: rgba(242, 242, 242, 0.8);
+	}
+	#page .ci-box img{
+		float: right;
+	}
+}

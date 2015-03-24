@@ -54,9 +54,16 @@ class SurveyController extends \BaseController {
 	 */
 	public function create($registration_id)
 	{
+		$vehicles_owned = ['BMW', 'VOLVO', 'CHEVROLET', 'MITSUBISHI', 'NISSAN', 'MERCEDES BENZ', 'PORSCHE', 'TOYOTA', 'KIA', 'AUDI', 'VOLKSWAGEN', 'HONDA', 'MAZDA', 'PEUGEOT', 'LEXUS', 'SUBARU', 'FORD', 'HYUNNDAI', 'OTHERS'];
+		$col_max_vehicles_owned = (round(sizeof($vehicles_owned)/2));
 		$fuels = ['Diesel' => 'Diesel', 'Gasoline' => 'Gasoline'];
+		$car_body_types = ['SEDAN', 'SUV', 'AUV', 'HATCHBACK', 'MULTI-PURPOSE VEHICLE', 'VAN', 'COUPE', 'OTHERS'];
+		$car_colors = ['WHITE', 'BLUE', 'YELLOW', 'BLACK', 'RED', 'GREEN', 'SILVER', 'BROWN', 'PINK', 'GRAY', 'OTHERS'];
+		$car_choices = ['HYUNNDAI', 'VOLVO', 'CHEVROLET', 'MITSUBISHI', 'NISSAN', 'MERCEDES BENZ', 'PORSCHE', 'TOYOTA', 'KIA', 'AUDI', 'VOLKSWAGEN', 'HONDA', 'MAZDA', 'PEUGEOT', 'LEXUS', 'SUBARU', 'FORD', 'OTHERS'];
+		$upholstery_colors = ['LIGHT (White, beige, light brown)', 'DARK (Black, gray, dark brown)', 'COMBINATION', 'NOTHING IN PARTICULAR'];
+		$buy_bmw_reasons = ['EXTERIOR DESIGN', 'INTERIOR DESIGN', 'ENGINE POWER', 'HANDLING', 'COMFORT/LUXURY', 'TECHNOLOGY', 'SAFETY', 'BRAND', 'FUEL ECONOMY', 'PRICING', 'MAINTENANCE COST', 'OTHERS'];
 
-		return View::make('survey', ['pageTitle' => 'Survey'], compact('registration_id', 'fuels'));
+		return View::make('survey', ['pageTitle' => 'Survey'], compact('registration_id', 'vehicles_owned', 'fuels', 'car_body_types', 'car_colors', 'upholstery_colors', 'car_choices', 'buy_bmw_reasons'));
 	}
 
 
@@ -70,13 +77,13 @@ class SurveyController extends \BaseController {
 	{
 		$input = Input::only('vehicles_owned', 'other_vehicles_owned', 'fuel', 'car_body_type', 'other_car_body_type', 'car_colors', 'other_car_color', 'upholstery_color', 'rating_exterior_design', 'rating_interior_design', 'rating_engine_power', 'rating_handling', 'rating_comfort_luxury', 'rating_technology', 'rating_safety', 'rating_brand', 'rating_fuel_economy', 'rating_pricing', 'rating_maintenance_cost', 'rating_others', 'other_rating', 'car_choices', 'other_car_choice', 'why_buy_a_bmw', 'other_why_buy_a_bmw', 'receive_correspondence', 'notify_bmw');
 
-		// Check form for error
-		// try {
-		// 	$this->surveyForm->validate($input);
-		// }
-		// catch(FormValidationException $error) {
-		// 	return Redirect::back()->withInput()->withErrors($error->getErrors());
-		// }
+		//Check form for error
+		try {
+			$this->surveyForm->validate($input);
+		}
+		catch(FormValidationException $error) {
+			return Redirect::back()->withInput()->withErrors($error->getErrors());
+		}
 
 
 		$registration = $this->registrationRepository->getRegistrationByRegID($registration_id);
@@ -96,7 +103,8 @@ class SurveyController extends \BaseController {
 			);
 
 			if($addSurveyAnswers) {
-				return Redirect::route('survey.create', $registration_id)->with('registration-success', 'Registration completed.');
+				// Flash::overlay('Please expect an email from us confirming your registration', 'Registration complete.');
+				return Redirect::route('survey.create', $registration_id)->with('registration-success', 'Registration complete.');
 			}
 			else {
 				Flash::error('Failed to register!', 'An error occured when trying to register.');

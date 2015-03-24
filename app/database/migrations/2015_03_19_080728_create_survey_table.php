@@ -16,12 +16,12 @@ class CreateSurveyTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('registration_id', 100)->unique();
-			$table->string('vehicles_owned', 100);
+			$table->string('vehicles_owned', 1000);
 			$table->string('other_vehicles_owned', 100)->nullable();
 			$table->string('fuel', 100);
-			$table->string('car_body_type', 100);
+			$table->string('car_body_type', 1000);
 			$table->string('other_car_body_type', 100)->nullable();
-			$table->string('car_colors', 100);
+			$table->string('car_colors', 1000);
 			$table->string('other_car_color', 100)->nullable();
 			$table->string('upholstery_color', 100);
 			$table->integer('rating_exterior_design');
@@ -37,9 +37,9 @@ class CreateSurveyTable extends Migration {
 			$table->integer('rating_maintenance_cost');
 			$table->integer('rating_others');
 			$table->string('other_rating', 100);
-			$table->string('car_choices', 100);
+			$table->string('car_choices', 1000);
 			$table->string('other_car_choice', 100)->nullable();
-			$table->string('why_buy_a_bmw', 100);
+			$table->string('why_buy_a_bmw', 1000);
 			$table->string('other_why_buy_a_bmw', 100)->nullable();
 			$table->string('receive_correspondence', 5);
 			$table->string('notify_bmw', 5);
